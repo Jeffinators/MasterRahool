@@ -38,7 +38,7 @@ jobs:
       - name: Set up build environment (ubuntu-latest)
         run: |
           sudo apt-get update
-          sudo apt-get -y install ccache
+          sudo apt-get -y install ccache libxrandr-dev
           echo "CCACHE_DIR=/tmp/ccache" >> $GITHUB_ENV
         if: matrix.os == 'ubuntu-latest'
 
