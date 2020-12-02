@@ -72,12 +72,12 @@ jobs:
       - uses: actions/upload-artifact@v2
         with:
           name: masterrahool-${{ matrix.os }}
-          path: build/bin
+          path: out/build
 
       - name: Zip Artifacts
         uses: papeloto/action-zip@5f1c4aa
         with:
-          files: build/bin
+          files: out/build
           dest: ${{ matrix.os }}.zip
         if: github.ref == 'refs/heads/master'
 
