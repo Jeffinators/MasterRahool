@@ -42,11 +42,6 @@ jobs:
           echo "CCACHE_DIR=/tmp/ccache" >> $GITHUB_ENV
         if: matrix.os == 'ubuntu-latest'
 
-      - name: Set up build environment (windows-latest)
-        shell: bash
-        run: echo "BOOST_ROOT=$BOOST_ROOT_1_72_0" >> $GITHUB_ENV
-        if: matrix.os == 'windows-latest'
-
       - uses: actions/cache@v1
         with:
           path: /tmp/ccache
@@ -72,12 +67,12 @@ jobs:
       - uses: actions/upload-artifact@v2
         with:
           name: masterrahool-${{ steps.git_short_sha.outputs.value }}-${{ matrix.os }}
-          path: ${projectDir}\\out\\build\\${name}
+          path: build
 
       - name: Zip Artifacts
         uses: papeloto/action-zip@5f1c4aa
         with:
-          files: ${projectDir}\\out\\build\\${name}
+          files: build
           dest: ${{ matrix.os }}.zip
         if: github.ref == 'refs/heads/master'
 
