@@ -2,6 +2,7 @@
 #include <string>
 #include <vector>
 #include <iterator>
+#include <time.h>
 
 #include <GLFW/glfw3.h>
 #include <imgui.h>
@@ -99,6 +100,7 @@ int main() {
 					
 					std::vector<std::string> perks_per_weapon;
 					std::string weapontype[] = { "Auto Rifle", "Pulse Rifle", "Scout Rifle", "Bow", "Sub-machine Gun", "Sidearm", "Handcannon", "Shotgun", "Sniper", "Breech-Loaded Grenade Launcher", "Fusion Rifle", "Trace Rifle", "Rocket Launcher", "Gernade Launcher", "Sword", "Machine Gun", "Linear Fusion Rifel" };
+					srand(time(NULL));
 					for (int i = 0; i < common; i++) {
 						randnumb = (rand() % 15);
 						weapon = weapontype[randnumb];
