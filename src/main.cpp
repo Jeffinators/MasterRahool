@@ -58,7 +58,11 @@ int main() {
 		static const auto BUTTON_SIZE = ImVec2(120.f, 45.f);
 
 		//The gui begins here
-		//There's no auto resizing of windows, you can work it in if you want to :D 
+		//There's no auto resizing of windows for the popups, you can work it in if you want to :D 
+		float width = ImGui::GetWindowWidth() / 1.35f;
+		float height = ImGui::GetWindowHeight() / 1.25f;
+		ImGui::SetNextWindowSize(ImVec2(width, height));
+		ImGui::SetNextWindowPos(ImVec2(ImGui::GetIO().DisplaySize.x / 2.f, ImGui::GetIO().DisplaySize.y / 2.f), ImGuiCond_Always, ImVec2(0.5f, 0.5f));
         ImGui::Begin("Engram Decrypter");
         {
 			ImGui::InputInt("Common", &common);
