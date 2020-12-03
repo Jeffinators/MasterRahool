@@ -1,5 +1,7 @@
 #include <iostream>
 #include <string>
+#include <vector>
+#include <iterator>
 
 #include <GLFW/glfw3.h>
 #include <imgui.h>
@@ -11,6 +13,7 @@
 #define GLSL_VERSION "#version 330"
 
 int main() {
+
     glfwInit();
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
@@ -54,6 +57,11 @@ int main() {
 		static int common = 0;
 		static int legendary = 0;
 		static int exotic = 0;
+		static std::string weaponname;
+		static std::string baseperk;
+		static std::string legendaryperk;
+		static std::string exoticperk;
+		static std::vector<std::vector<std::string>> weapon_buffer;
 
 		static const auto BUTTON_SIZE = ImVec2(120.f, 45.f);
 
@@ -72,9 +80,37 @@ int main() {
 			ImGui::Separator();
 			ImGui::Spacing();
 			if (ImGui::Button("Decrypt", BUTTON_SIZE)) {
-				if ((common < 9 && common > 1) && (legendary < 9 && legendary > 1) && (exotic < 9 && exotic > 1)) {
-					//On successful non-out of bounds numbers the code is executed 
-					//whatever you're doing 
+				if ((common >= 0) && (legendary >= 0) && (exotic >= 0)) {
+					int randnumb;
+					std::string weapon;
+					
+					std::vector<std::string> perks_per_weapon;
+					std::string weapontype[] = { "Auto Rifle", "Pulse Rifle", "Scout Rifle", "Bow", "Sub-machine Gun", "Sidearm", "Handcannon", "Shotgun", "Sniper", "Breech-Loaded Grenade Launcher", "Fusion Rifle", "Trace Rifle", "Rocket Launcher", "Gernade Launcher", "Sword", "Machine Gun", "Linear Fusion Rifel" };
+					for (int i = 0; i < common; i++) {
+						randnumb = (rand() % 15);
+						weapon = weapontype[randnumb];
+						std::string perk1[] = { "Full Auto Trigger System", "Burst Fire", "Rangefinder", "Quiver", "Bullet Hose", "Quickdraw", "Deadeye", "Pellets", "No Land Beyond", "Explosive Rounds", "Charge Shot", "Trace Beam", "Danger Zone", "Explosive Rounds", "Melee Weapon", "Spray and Pray", "Charging Coils" };
+						perks_per_weapon.push_back(weapontype[randnumb]); 
+						perks_per_weapon.push_back(perk1[randnumb]);
+						weapon_buffer.push_back(perks_per_weapon);
+						perks_per_weapon.clear();
+					}
+					for (int i = 0; i < legendary; i++) {
+						int randnumb2;
+						randnumb = (rand() % 15);
+						weapon = weapontype[randnumb];
+						std::string perk1[] = { "Full Auto Trigger System", "Burst Fire", "Rangefinder", "Quiver", "Bullet Hose", "Quickdraw", "Deadeye", "Pellets", "No Land Beyond", "Explosive Rounds", "Charge Shot", "Trace Beam", "Danger Zone", "Explosive Rounds", "Melee Weapon", "Spray and Pray", "Charging Coils" };
+						perks_per_weapon.push_back(weapontype[randnumb]);
+						perks_per_weapon.push_back(perk1[randnumb]);
+						randnumb2 = (rand() % 32);
+						while (randnumb2 == randnumb) {
+							randnumb2 = (rand() % 25);
+						}
+						std::string perk2[] = { "Full Auto Trigger System", "Rangefinder", "Bullet Hose", "Quickdraw", "Deadeye", "Pellets", "No Land Beyond", "Explosive Rounds", "Explosive Rounds", "Spray and Pray", "Zen Moment", "High Caliber Rounds", "Dragonfly", "Outlaw", "Rampage", "Pulse Monitor", "Cluster Bomb", "Auto - loading Holster", "Lightweight Frame", "Assassin's Weapon", "Backup Plan", "Grave Robber", "Mechanized Autoloader", "Opening Shot", "Threat Detector", "Triple Tap" };
+						perks_per_weapon.push_back(perk2[randnumb2]);
+						weapon_buffer.push_back(perks_per_weapon);
+						perks_per_weapon.clear();
+					}
 					ImGui::OpenPopup("Results");
 				}
 				else {
@@ -83,13 +119,15 @@ int main() {
 			}
 			if (ImGui::BeginPopupModal("Results"))
 			{
-				std::string result = std::to_string(common + legendary + exotic);
-				ImGui::Text(result.c_str());
+				for(std::vector<std::string> i : weapon_buffer){
+					for(std::string x : i){
+						ImGui::Text(x.c_str());
+					}
+				}
 				if (ImGui::Button("OK")) {
 					ImGui::CloseCurrentPopup();
 				}
 				ImGui::EndPopup();
-				
 			}
 			if (ImGui::BeginPopupModal("Error"))
 			{
@@ -98,7 +136,6 @@ int main() {
 					ImGui::CloseCurrentPopup();
 				}
 				ImGui::EndPopup();
-
 			}
         }
         ImGui::End();
