@@ -12,6 +12,19 @@
 
 #define GLSL_VERSION "#version 330"
 
+void drawWeaponOutput(std::vector<std::vector<std::string>> &vec) {
+	int counter = 0;
+	for (std::vector<std::string> g : vec) {
+		std::string wepcount = "Weapon " + std::to_string(counter + 1) + ":";
+		ImGui::Text(wepcount.c_str());
+		for (std::string x : g) {
+			ImGui::Text(x.c_str());
+		}
+		counter++;
+		ImGui::Separator();
+	}
+}
+
 int main() {
 
     glfwInit();
@@ -103,11 +116,29 @@ int main() {
 						perks_per_weapon.push_back(weapontype[randnumb]);
 						perks_per_weapon.push_back(perk1[randnumb]);
 						randnumb2 = (rand() % 32);
-						while (randnumb2 == randnumb) {
-							randnumb2 = (rand() % 25);
+						while (randnumb2 == randnumb||randnumb2==2||randnumb2==4||randnumb2==11||randnumb2==12||randnumb2==13||randnumb2==14||randnumb2==15||randnumb2==17) {
+							randnumb2 = (rand() % 32);
 						}
-						std::string perk2[] = { "Full Auto Trigger System", "Rangefinder", "Bullet Hose", "Quickdraw", "Deadeye", "Pellets", "No Land Beyond", "Explosive Rounds", "Explosive Rounds", "Spray and Pray", "Zen Moment", "High Caliber Rounds", "Dragonfly", "Outlaw", "Rampage", "Pulse Monitor", "Cluster Bomb", "Auto - loading Holster", "Lightweight Frame", "Assassin's Weapon", "Backup Plan", "Grave Robber", "Mechanized Autoloader", "Opening Shot", "Threat Detector", "Triple Tap" };
+						std::string perk2[] = { "Full Auto Trigger System", "Burst Fire", "Rangefinder", "Quiver", "Bullet Hose", "Quickdraw", "Deadeye", "Pellets", "No Land Beyond", "Explosive Rounds", "Charge Shot", "Trace Beam", "Danger Zone", "Explosive Rounds", "Melee Weapon", "Spray and Pray", "Charging Coils", "Zen Moment", "High Caliber Rounds", "Dragonfly", "Outlaw", "Rampage", "Pulse Monitor", "Cluster Bomb", "Auto - loading Holster", "Lightweight Frame", "Assassin's Weapon", "Backup Plan", "Grave Robber", "Mechanized Autoloader", "Opening Shot", "Threat Detector", "Triple Tap" };
 						perks_per_weapon.push_back(perk2[randnumb2]);
+						weapon_buffer.push_back(perks_per_weapon);
+						perks_per_weapon.clear();
+					}
+					for (int i = 0; i < exotic; i++) {
+						int randnumb2;
+						randnumb = (rand() % 11);
+						std::string exoticweapon[] = { "Crimson", "Red Death", "Sweet Business", "Graviton Lance", "Mida Multi-Tool", "Sunshot", "Tractor Cannon", "D.A.R.C.I.", "Merciless", "The Wardcliff Coil", "The Prospector" };
+						std::string perky1[] = {  "Burst Fire",  "Burst Fire", "Spray and Pray",  "Burst Fire", "Rangefinder", "Deadeye", "Pellets", "No Land Beyond", "Charge Shot", "Danger Zone", "Explosive Rounds"};
+						std::string perk2[] = { "Full Auto Trigger System", "Burst Fire", "Rangefinder", "Quiver", "Bullet Hose", "Quickdraw", "Deadeye", "Pellets", "No Land Beyond", "Explosive Rounds", "Charge Shot", "Trace Beam", "Danger Zone", "Explosive Rounds", "Melee Weapon", "Spray and Pray", "Charging Coils", "Zen Moment", "High Caliber Rounds", "Dragonfly", "Outlaw", "Rampage", "Pulse Monitor", "Cluster Bomb", "Auto - loading Holster", "Lightweight Frame", "Assassin's Weapon", "Backup Plan", "Grave Robber", "Mechanized Autoloader", "Opening Shot", "Threat Detector", "Triple Tap" };
+						perks_per_weapon.push_back(exoticweapon[randnumb]);
+						perks_per_weapon.push_back(perky1[randnumb]);
+						randnumb2 = (rand() % 32);
+						while (perky1[randnumb] == perk2[randnumb2]||randnumb2==2||randnumb2==4||randnumb2==11||randnumb2==12||randnumb2==13||randnumb2==14||randnumb2==15||randnumb2==17) {
+							randnumb2 = (rand() % 32);
+						} //try again we were missing the exotic perk //PogU
+						perks_per_weapon.push_back(perk2[randnumb2]);						
+						std::string exoticperk[] = { "Cruel Remedy", "Red Death", "Business Time", "Black Hole", "Multi-Tool", "Sunburn", "Repulsor Force", "Personal Assistant", "Conserve Momentum", "Mad Scientist", "Excavation" };
+						perks_per_weapon.push_back(exoticperk[randnumb]);
 						weapon_buffer.push_back(perks_per_weapon);
 						perks_per_weapon.clear();
 					}
@@ -119,12 +150,9 @@ int main() {
 			}
 			if (ImGui::BeginPopupModal("Results"))
 			{
-				for(std::vector<std::string> i : weapon_buffer){
-					for(std::string x : i){
-						ImGui::Text(x.c_str());
-					}
-				}
+				drawWeaponOutput(weapon_buffer);
 				if (ImGui::Button("OK")) {
+					weapon_buffer.clear();
 					ImGui::CloseCurrentPopup();
 				}
 				ImGui::EndPopup();
