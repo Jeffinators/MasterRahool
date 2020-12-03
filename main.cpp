@@ -15,11 +15,6 @@ int main()
 		string perk1[] = { "Full Auto Trigger System", "Burst Fire", "Rangefinder", "Deadeye", "Bullet Hose", "Quickdraw", "Quiver", "Pellets", "No Land Beyond", "Explosive Rounds", "Charge Shot", "Trace Beam", "Danger Zone", "Melee Weapon", "Spray and Pray", "Charging Coils" };
 		cout << weapontype[randnumb] << endl;
 		cout << perk1[randnumb];
-<<<<<<< HEAD
-=======
-		/*this is how I output the weapon type, might change all the weapon types to be variables them selves
-		that will  then give you the associated perks with them but for now just the name works*/
->>>>>>> 07847c87fec95449d207437af8e6b4b6dfeb2758
 	}
 	for (int i = 0; i < numblegendary; i++) {
 		randnumb = (rand() % 15);
