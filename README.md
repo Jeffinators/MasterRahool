@@ -6,13 +6,16 @@ Made using Dear ImGui GLFW OpenGL
 ## Download and Install
 Download the latest release [here](https://github.com/Jeffinators/MasterRahool/releases)
 
-For windows navigate to Release and extract masterrahool.exe 
+### Windows 
+Navigate to Release and extract masterrahool.exe 
 
-For linux get prereqs `sudo apt-get install libxrandr-dev libxinerama-dev libx11-dev libxcursor-dev libxi-dev libxext-dev`
+### Linux
+Make sure you have the following dev packages `libxrandr libxinerama libx11 libxcursor libxi libxext`
+Then extract and launch using ./masterrahool
 
-then extract and launch using ./masterrahool
-
-For macOS extract masterrahool and double click the app
+### macOS
+Extract masterrahool, rename to masterrahool.app and double click the app
+Min macOS Catalina 
 
 ## Usage 
 Enter amount of commons, legendaries, exotics, press decrypt
