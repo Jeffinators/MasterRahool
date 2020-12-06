@@ -10,12 +10,12 @@ Download the latest release [here](https://github.com/Jeffinators/MasterRahool/r
 Navigate to Release and extract masterrahool.exe 
 
 ### Linux
-Make sure you have the following dev packages `libxrandr libxinerama libx11 libxcursor libxi libxext`
-Then extract and launch using ./masterrahool
+Make sure you have the following dev packages `libxrandr libxinerama libx11 libxcursor libxi libxext`\
+Then extract and launch using `./masterrahool`
 
 ### macOS
-Extract masterrahool, rename to masterrahool.app and double click the app
-Min macOS Catalina 
+Extract masterrahool launch using `./masterrahool`\
+Mininum macOS is 10.15 
 
 ## Usage 
 Enter amount of commons, legendaries, exotics, press decrypt
